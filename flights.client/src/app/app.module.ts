@@ -7,12 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { BookFlightComponent } from './book-flight/book-flight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    SearchFlightComponent
+    SearchFlightComponent,
+    BookFlightComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -21,6 +23,8 @@ import { SearchFlightComponent } from './search-flight/search-flight.component';
     RouterModule.forRoot([
 
       { path: '', component: SearchFlightComponent, pathMatch: 'full' },
+      { path: 'search-flights', component: SearchFlightComponent},
+      { path: 'book-flight/:flightId', component: BookFlightComponent},
 
     ])
   ],
