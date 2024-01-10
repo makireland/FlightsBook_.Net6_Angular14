@@ -20,6 +20,8 @@ namespace Flights.Server
                     Description = "Development Server",
                     Url = "https://localhost:7027"
                 });
+
+                c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["action"] + e.ActionDescriptor.RouteValues["controller"]}");
             });
 
             var app = builder.Build();
