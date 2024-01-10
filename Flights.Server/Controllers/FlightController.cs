@@ -8,20 +8,16 @@ namespace Flights.Server.Controllers
     public class FlightController : ControllerBase
     {
         private readonly ILogger<FlightController> _logger;
+        static Random random = new Random();
 
         public FlightController(ILogger<FlightController> logger)
         {
             _logger = logger;
         }
 
-        Random random = new Random();
-
-        [HttpGet]
-        public IEnumerable<FlightRm> Search()
+        static private FlightRm[] flights = new FlightRm[]
         {
-            return new FlightRm[]
-            {
-                new (Guid.NewGuid(),
+            new (Guid.NewGuid(),
                 "America Airline",
                 random.Next(90,5000).ToString(),
                 new TimePlaceRm("Los Angeles", DateTime.Now.AddHours(random.Next(1, 3))),
@@ -34,7 +30,7 @@ namespace Flights.Server.Controllers
                 new TimePlaceRm("Dublin", DateTime.Now.AddHours(random.Next(1, 13))),
                 new TimePlaceRm("Spain", DateTime.Now.AddHours(random.Next(4, 15))),
                 random.Next(1, 853)),
-                
+
                 new (Guid.NewGuid(),
                 "Ryanair",
                 random.Next(90,5000).ToString(),
@@ -48,8 +44,18 @@ namespace Flights.Server.Controllers
                 new TimePlaceRm("Sao Paulo", DateTime.Now.AddHours(random.Next(1, 12))),
                 new TimePlaceRm("Goiania", DateTime.Now.AddHours(random.Next(2, 16))),
                 random.Next(1, 853)),
+        };
 
-            };
+        [HttpGet]
+        public IEnumerable<FlightRm> Search()
+        {
+            return flights;
+        }
+
+        [HttpGet("{id}")]
+        public FlightRm Find(Guid id)
+        {
+            return flights.SingleOrDefault(f => f.Id == id);
         }
     }
 }

@@ -48,6 +48,7 @@
         </div>
     </div>
 
+    <!-- for loop which loops through the server and bring the data -->
     <div *ngFor="let flight of searchResult">
         <div class="card text-dark mt-5 text-center" style="box-shadow: 1px 1px 10px #BCC7D2; border:none">
             <div class="card-body">
@@ -94,7 +95,7 @@
                             <i class="fas fa-usd">{{flight?.price}}</i>
                             <br />
 
-                            <a class="btn btn-success btn-lg mt-2">
+                            <a [routerLink]="['/book-flight',flight.id]" class="btn btn-success btn-lg mt-2">
                                 <i class="fas fa-ticket"></i>
                                 Book
                             </a>
