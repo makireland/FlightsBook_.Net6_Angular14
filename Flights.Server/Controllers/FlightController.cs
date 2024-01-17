@@ -9,12 +9,6 @@ namespace Flights.Server.Controllers
     {
         private readonly ILogger<FlightController> _logger;
         static Random random = new Random();
-
-        public FlightController(ILogger<FlightController> logger)
-        {
-            _logger = logger;
-        }
-
         static private FlightRm[] flights = new FlightRm[]
         {
             new (Guid.NewGuid(),
@@ -45,6 +39,11 @@ namespace Flights.Server.Controllers
             new TimePlaceRm("Goiania", DateTime.Now.AddHours(random.Next(2, 16))),
             random.Next(1, 853)),
         };
+
+        public FlightController(ILogger<FlightController> logger)
+        {
+            _logger = logger;
+        }
 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
